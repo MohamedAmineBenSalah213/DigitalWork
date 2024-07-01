@@ -1,0 +1,21 @@
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Fix Problem </h4>
+      
+    </div>
+    <div class="modal-body">
+       
+                <pngx-input-select  *ngIf="task.task_problem==2||task.task_problem==3"  [(ngModel)]="selectedCorrespondent" [items]="correspondents" i18n-title title="Correspondent" [allowNull]="true" [showFilter]="true" [horizontal]="true" 
+              [suggestions]="suggestions?.correspondents"></pngx-input-select>
+                
+          
+            
+                <pngx-input-select *ngIf="task.task_problem==1 ||task.task_problem==3"   bindLabel="userName" [(ngModel)]="selectedOwner" [items]="owners" i18n-title title="Owner"  [showFilter]="true" [horizontal]="true"  ></pngx-input-select>
+            
+                
+      
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="cancel()" i18n >Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="save(task.task_document.id)"i18n >Save</button>
+      </div>

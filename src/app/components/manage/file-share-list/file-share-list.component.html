@@ -1,0 +1,80 @@
+<pngx-page-header title="File Share" i18n-title> 
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-primary ms-4"
+      (click)="editShareFile()"
+    >
+      <!-- (click)="editMailAccount()"    *pngxIfPermissions="{ action: PermissionAction.Add, type: PermissionType.MailAccount }" -->
+      <svg class="sidebaricon me-1" fill="currentColor">
+        <use xlink:href="assets/bootstrap-icons.svg#plus-circle" />
+      </svg>
+      <ng-container i18n>Add File Share</ng-container>
+    </button>
+</pngx-page-header>
+<!-- *pngxIfPermissions="{ action: PermissionAction.View, type: PermissionType.MailAccount }" -->
+<ng-container>
+  
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col" i18n>Name</div>
+        <div class="col" i18n>Folder Path</div>
+        <div class="col" i18n>Actions</div>
+      </div>
+    </li>
+
+    <li *ngFor="let file of data" class="list-group-item">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <button
+            class="btn btn-link p-0"
+            type="button"
+            (click)="editShareFile(file)"
+          >
+            {{ file?.shareName }}
+          </button>
+        </div>
+        <!-- [disabled]="!permissionsService.currentUserCan(PermissionAction.Change, PermissionType.MailAccount)" -->
+        <div class="col d-flex align-items-center">
+          {{ file?.folderPath }}
+        </div>
+        <div class="col">
+          <div class="btn-group">
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              type="button"
+              (click)="editShareFile(file)"
+            >
+              <!-- [disabled]="!userCanEdit(file)"-->
+              <svg class="buttonicon-sm" fill="currentColor">
+                <!-- *pngxIfPermissions="{ action: PermissionAction.Change, type: PermissionType.MailAccount }"  -->
+                <use xlink:href="assets/bootstrap-icons.svg#pencil" /></svg>&nbsp;<ng-container i18n>Edit</ng-container>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              type="button"
+              (click)="editPermissions(file)"
+            >
+              <!-- *pngxIfOwner="account"  -->
+              <svg class="buttonicon-sm" fill="currentColor">
+                <use xlink:href="assets/bootstrap-icons.svg#person-lock" /></svg>&nbsp;<ng-container i18n>Permissions</ng-container>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              type="button"
+              (click)="deleteShareFile(file)"
+            >
+              <!-- [disabled]="!userIsOwner(file)"-->
+              <!-- *pngxIfPermissions="{ action: PermissionAction.Delete, type: PermissionType.MailAccount }" -->
+              <svg class="buttonicon-sm" fill="currentColor">
+                <use xlink:href="assets/bootstrap-icons.svg#trash" /></svg>&nbsp;<ng-container i18n>Delete</ng-container>
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li *ngIf="shareFiles.length === 0" class="list-group-item" i18n>
+      No File Share defined.
+    </li>
+  </ul>
+</ng-container>

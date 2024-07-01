@@ -1,0 +1,47 @@
+<div ngbDropdown #fieldDropdown="ngbDropdown">
+<!--     <button class="btn btn-sm btn-outline-primary col" id="customFieldsDropdown" [disabled]="disabled" ngbDropdownToggle> -->
+    
+      <div class="d-none d-sm-inline" >&nbsp;<ng-container i18n>Custom Fields</ng-container></div>
+   <!--  </button> -->
+    <div  aria-labelledby="customFieldsDropdown" class="custom-fields-dropdown">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <pngx-input-select class="mb-3"
+                    [items]="unusedFields"
+                    bindLabel="name"
+                    [(ngModel)]="field"
+                    [placeholder]="placeholderText"
+                    [notFoundText]="notFoundText"       
+                    (createNew)="createField($event)"
+                    bindValue="id">
+                </pngx-input-select>
+                <!--   [disableCreateNew]="!canCreateFields" -->
+                <div class="btn-toolbar" role="toolbar">
+                    <button class="btn btn-sm btn-outline-secondary me-auto" type="button" (click)="createField()" ><!-- [disabled]="!canCreateFields" -->
+                        <svg fill="currentColor" class="buttonicon-sm me-1 mb-1">
+                        <use xlink:href="assets/bootstrap-icons.svg#asterisk"/>
+                        </svg><ng-container i18n>Create New Field</ng-container>
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary me-1" type="button" (click)="addField() "> <!-- [disabled]="field === undefined" --><!-- fieldDropdown.close() -->
+                        <svg fill="currentColor" class="buttonicon me-1">
+                          <use xlink:href="assets/bootstrap-icons.svg#plus-circle"/>
+                        </svg><ng-container i18n>Add</ng-container>
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <!-- Afficher les champs personnalisés sélectionnés -->
+        <ng-container *ngFor="let selectedField of selectedFields">
+            <!-- Utilisez les propriétés de selectedField pour l'affichage -->
+            <div class="mb-1 mx-3">{{ selectedField.name }}
+                <button class="btn btn-sm btn-danger" (click)="removeField(i)">
+                    <svg fill="currentColor" class="buttonicon-sm me-1 mb-1">
+                        <use xlink:href="assets/bootstrap-icons.svg#trash"/>
+                    </svg>
+                    Remove
+                </button>
+                
+            </div>
+        </ng-container>
+    </div>
+</div>

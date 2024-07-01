@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "A supercharged version of paperless: scan, index and archive all your physical documents",
+  "display": "standalone",
+  "icons": [
+   
+    {
+      "src": "assets/logo-notext.svg",
+      "sizes": "any"
+    }
+  ],
+  "name": "APP",
+  "short_name": "APP",
+  "start_url": "/"
+}
